@@ -11,9 +11,7 @@ function App() {
       <BrowserRouter>
         <GlobalCSS />
         <Header />
-        <div className="container">
-          <Router />
-        </div>
+        <Router />
         <Footer />
       </BrowserRouter>
     </>

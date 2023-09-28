@@ -20,13 +20,15 @@ const Header = () => {
 
   return (
     <HeaderDiv height={height}>
-      <LogoDiv>
-        {showReturnLink && (
-          <ReturnLink to="/">&lsaquo; Voltar para restaurantes</ReturnLink>
-        )}
-        <img src={logo} alt="Logo" />
-        {showCart && <Cart>0 produto(s) no carrinho</Cart>}
-      </LogoDiv>
+      <div className="container">
+        <LogoDiv>
+          {showReturnLink && (
+            <ReturnLink to="/">&lsaquo; Voltar para restaurantes</ReturnLink>
+          )}
+          <img src={logo} alt="Logo" />
+          {showCart && <Cart>0 produto(s) no carrinho</Cart>}
+        </LogoDiv>
+      </div>
       {showTitle && (
         <Title>Viva experiências gastronômicas no conforto da sua casa</Title>
       )}

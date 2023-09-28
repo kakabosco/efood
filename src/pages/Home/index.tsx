@@ -67,9 +67,9 @@ const restaurants: RestaurantM[] = [
 ]
 
 const Home = () => (
-  <>
+  <div className="container">
     <RestaurantList restaurants={restaurants} />
-  </>
+  </div>
 )
 
 export default Home

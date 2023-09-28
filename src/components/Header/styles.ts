@@ -13,8 +13,7 @@ export const LogoDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto;
-  padding: 64px 48px;
+  padding: 64px 0;
 
   img {
     margin: 0 auto;

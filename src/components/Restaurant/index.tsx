@@ -12,7 +12,7 @@ import {
 } from './styles'
 import estrela from '../../assets/images/estrela.png'
 
-type Props = {
+export type Props = {
   infos: string[]
   image: string
   title: string

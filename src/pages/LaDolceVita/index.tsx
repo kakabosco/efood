@@ -50,7 +50,7 @@ const dishes: DishM[] = [
 
 const LaDolceVita = () => (
   <>
-    <Banner />
+    <Banner infos={['Italiana']} title="La Dolce Vita Trattoria" />
     <div className="container">
       <DishesList dishes={dishes} />
     </div>

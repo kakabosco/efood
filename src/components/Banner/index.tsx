@@ -1,11 +1,21 @@
 import { Image, Info, Title } from './styles'
 import bannerImg from '../../assets/images/trattoria2.png'
+import { Props as RestaurantProps } from '../Restaurant'
 
-const Banner = () => (
+type BannerProps = Omit<
+  RestaurantProps,
+  'image' | 'rating' | 'description' | 'about'
+>
+
+const Banner = ({ infos, title }: BannerProps) => (
   <Image style={{ backgroundImage: `url(${bannerImg})` }}>
     <div className="container">
-      <Info>Italiana</Info>
-      <Title>La Dolce Vita Trattoria</Title>
+      <Info>
+        {infos.map((info) => (
+          <span key={info}>{info}</span>
+        ))}
+      </Info>
+      <Title>{title}</Title>
     </div>
   </Image>
 )

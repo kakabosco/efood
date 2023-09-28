@@ -2,6 +2,7 @@ import Banner from '../../components/Banner'
 import DishesList from '../../components/DishesList'
 import DishM from '../../models/Dish'
 import trattoriaDish from '../../assets/images/trattoria3.png'
+import trattoriaBanner from '../../assets/images/trattoria2.png'
 
 const dishes: DishM[] = [
   {
@@ -50,7 +51,11 @@ const dishes: DishM[] = [
 
 const LaDolceVita = () => (
   <>
-    <Banner infos={['Italiana']} title="La Dolce Vita Trattoria" />
+    <Banner
+      infos={['Italiana']}
+      title="La Dolce Vita Trattoria"
+      bannerImg={trattoriaBanner}
+    />
     <div className="container">
       <DishesList dishes={dishes} />
     </div>

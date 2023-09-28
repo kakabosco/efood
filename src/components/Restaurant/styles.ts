@@ -3,8 +3,6 @@ import { colors } from '../../styles'
 
 export const Card = styled.div`
   position: relative;
-  max-width: 472px;
-  width: 100%;
   padding: 8px;
   border-radius: 12px;
   border: 1px solid ${colors.mainColor};

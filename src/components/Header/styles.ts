@@ -1,15 +1,24 @@
 import styled from 'styled-components'
 import header from '../../assets/images/header.png'
+import { Link } from 'react-router-dom'
+import { HeaderProps } from '.'
+import { colors } from '../../styles'
 
-export const HeaderDiv = styled.header`
-  height: 350px;
+export const HeaderDiv = styled.header<HeaderProps>`
+  height: ${(props) => props.height};
   background-image: url(${header});
 `
 
 export const LogoDiv = styled.div`
   display: flex;
-  justify-content: center;
-  padding: 64px 0;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 64px 48px;
+
+  img {
+    margin: 0 auto;
+  }
 `
 
 export const Title = styled.h2`
@@ -19,4 +28,14 @@ export const Title = styled.h2`
   font-weight: bold;
   text-align: center;
   line-height: 42px;
+`
+
+export const ReturnLink = styled(Link)`
+  color: ${colors.mainColor};
+  text-decoration: none;
+  font-weight: bold;
+`
+
+export const Cart = styled.a`
+  font-weight: bold;
 `

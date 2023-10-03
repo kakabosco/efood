@@ -1,24 +1,32 @@
+import { useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Restaurant } from '../../pages/Home'
 import { Image, Info, Title } from './styles'
-import { Props as RestaurantProps } from '../Restaurant'
 
-type BannerProps = Omit<
-  RestaurantProps,
-  'image' | 'rating' | 'description' | 'about'
-> & {
-  bannerImg: string
+const Banner = () => {
+  const { id } = useParams()
+  const [restaurant, setRestaurant] = useState<Restaurant>()
+
+  useEffect(() => {
+    fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
+      .then((response) => response.json())
+      .then((response) => setRestaurant(response))
+  }, [id])
+
+  if (!restaurant) {
+    return <h3>Carregando...</h3>
+  }
+
+  return (
+    <Image style={{ backgroundImage: `url(${restaurant.capa})` }}>
+      <div className="container">
+        <Info>
+          {restaurant.tipo.charAt(0).toUpperCase() + restaurant.tipo.slice(1)}
+        </Info>
+        <Title>{restaurant.titulo}</Title>
+      </div>
+    </Image>
+  )
 }
-
-const Banner = ({ infos, title, bannerImg }: BannerProps) => (
-  <Image style={{ backgroundImage: `url(${bannerImg})` }}>
-    <div className="container">
-      <Info>
-        {infos.map((info) => (
-          <span key={info}>{info}</span>
-        ))}
-      </Info>
-      <Title>{title}</Title>
-    </div>
-  </Image>
-)
 
 export default Banner

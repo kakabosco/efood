@@ -10,6 +10,8 @@ export const Card = styled.div`
 
   > img {
     width: 100%;
+    height: 250px;
+    object-fit: cover;
     border-radius: 8px;
   }
 `

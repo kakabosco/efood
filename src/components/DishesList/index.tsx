@@ -11,13 +11,7 @@ const DishesList = ({ dishes }: Props) => (
     <List>
       {dishes.map((dish) => (
         <li key={dish.id}>
-          <Dish
-            image={dish.foto}
-            title={dish.nome}
-            description={dish.descricao}
-            portion={dish.porcao}
-            price={dish.preco}
-          />
+          <Dish dish={dish} />
         </li>
       ))}
     </List>

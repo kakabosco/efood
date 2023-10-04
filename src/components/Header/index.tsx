@@ -1,4 +1,7 @@
 import { useLocation } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootReducer } from '../../store'
+import { open } from '../../store/reducers/cart'
 import { HeaderDiv, Title, LogoDiv, ReturnLink, Cart } from './styles'
 import logo from '../../assets/images/logo.png'
 
@@ -11,6 +14,12 @@ export type HeaderProps = {
 
 const Header = () => {
   const location = useLocation()
+  const { items } = useSelector((state: RootReducer) => state.cart)
+  const dispatch = useDispatch()
+  const openCart = () => {
+    dispatch(open())
+  }
+
   const isHomePage = location.pathname === '/'
 
   const height = isHomePage ? '350px' : '186px'
@@ -26,7 +35,11 @@ const Header = () => {
             <ReturnLink to="/">&lsaquo; Voltar para restaurantes</ReturnLink>
           )}
           <img src={logo} alt="Logo" />
-          {showCart && <Cart>0 produto(s) no carrinho</Cart>}
+          {showCart && (
+            <Cart onClick={openCart}>
+              {items.length} produto(s) no carrinho
+            </Cart>
+          )}
         </LogoDiv>
       </div>
       {showTitle && (

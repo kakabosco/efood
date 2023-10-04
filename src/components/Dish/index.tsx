@@ -1,3 +1,4 @@
+import { useDispatch } from 'react-redux'
 import { useState } from 'react'
 import {
   Card,
@@ -10,28 +11,40 @@ import {
   AddCart
 } from './styles'
 import close from '../../assets/images/fechar.png'
+import { add, open } from '../../store/reducers/cart'
+import { Dish as DishType } from '../../pages/Home'
 
 type Props = {
-  image: string
-  title: string
-  description: string
-  portion: string
-  price: number
+  dish: DishType
 }
 
 type ModalState = {
-  isOpen: boolean
+  isOpenM: boolean
 }
 
-const Dish = ({ image, title, description, portion, price }: Props) => {
+export const priceFormatter = (price = 0) => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(price)
+}
+
+const Dish = ({ dish }: Props) => {
   const [modal, setModal] = useState<ModalState>({
-    isOpen: false
+    isOpenM: false
   })
 
   const closeModal = () => {
     setModal({
-      isOpen: false
+      isOpenM: false
     })
+  }
+
+  const dispatch = useDispatch()
+  const addToCart = () => {
+    dispatch(add(dish))
+    dispatch(open())
+    closeModal()
   }
 
   const getDescriptionD = (description: string) => {
@@ -40,24 +53,17 @@ const Dish = ({ image, title, description, portion, price }: Props) => {
     }
   }
 
-  const priceFormatter = (price = 0) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(price)
-  }
-
   return (
     <>
       <Card>
-        <img src={image} alt={title} />
-        <Title>{title}</Title>
-        <Description>{getDescriptionD(description)}</Description>
-        <MoreButton onClick={() => setModal({ isOpen: true })}>
+        <img src={dish.foto} alt={dish.nome} />
+        <Title>{dish.nome}</Title>
+        <Description>{getDescriptionD(dish.descricao)}</Description>
+        <MoreButton onClick={() => setModal({ isOpenM: true })}>
           Mais detalhes
         </MoreButton>
       </Card>
-      <Modal className={modal.isOpen ? 'active' : ''}>
+      <Modal className={modal.isOpenM ? 'active' : ''}>
         <div className="container">
           <header>
             <img
@@ -69,12 +75,14 @@ const Dish = ({ image, title, description, portion, price }: Props) => {
             />
           </header>
           <ModalContent>
-            <img src={image} alt={title} />
+            <img src={dish.foto} alt={dish.nome} />
             <div>
-              <Title>{title}</Title>
-              <Description>{description}</Description>
-              <Portion>Serve {portion}</Portion>
-              <AddCart>Adicionar ao carrinho - {priceFormatter(price)}</AddCart>
+              <Title>{dish.nome}</Title>
+              <Description>{dish.descricao}</Description>
+              <Portion>Serve {dish.porcao}</Portion>
+              <AddCart onClick={addToCart}>
+                Adicionar ao carrinho - {priceFormatter(dish.preco)}
+              </AddCart>
             </div>
           </ModalContent>
         </div>

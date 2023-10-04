@@ -37,4 +37,5 @@ export const ReturnLink = styled(Link)`
 
 export const Cart = styled.a`
   font-weight: bold;
+  cursor: pointer;
 `

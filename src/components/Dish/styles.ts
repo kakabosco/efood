@@ -110,7 +110,7 @@ export const ModalContent = styled.div`
 
   @media (max-width: ${breakpoints.tablet}) {
     display: block;
-    height: 80vh;
+    height: 60vh;
     overflow-y: scroll;
 
     img {

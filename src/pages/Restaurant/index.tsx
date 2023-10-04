@@ -16,7 +16,7 @@ const Restaurant = () => {
   return (
     <>
       <Banner />
-      <div className="container">
+      <div>
         <DishesList dishes={dishes} />
       </div>
       <Cart />

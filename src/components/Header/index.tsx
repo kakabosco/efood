@@ -4,6 +4,7 @@ import { RootReducer } from '../../store'
 import { open } from '../../store/reducers/cart'
 import { HeaderDiv, Title, LogoDiv, ReturnLink, Cart } from './styles'
 import logo from '../../assets/images/logo.png'
+import { Link } from 'react-router-dom'
 
 export type HeaderProps = {
   height?: string
@@ -34,7 +35,9 @@ const Header = () => {
           {showReturnLink && (
             <ReturnLink to="/">&lsaquo; Voltar para restaurantes</ReturnLink>
           )}
-          <img src={logo} alt="Logo" />
+          <Link to="/">
+            <img src={logo} alt="Logo" />
+          </Link>
           {showCart && (
             <Cart onClick={openCart}>
               {items.length} produto(s) no carrinho

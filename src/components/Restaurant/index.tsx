@@ -30,8 +30,8 @@ const Restaurant = ({
   id
 }: Props) => {
   const getDescriptionR = (description: string) => {
-    if (description.length > 170) {
-      return description.substring(0, 167) + '...'
+    if (description.length > 150) {
+      return description.substring(0, 147) + '...'
     }
   }
 

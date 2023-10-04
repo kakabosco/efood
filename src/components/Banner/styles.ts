@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const Image = styled.div`
   position: relative;
@@ -25,6 +25,14 @@ export const Image = styled.div`
     padding-top: 210px;
     position: relative;
     z-index: 1;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      width: 80%;
+    }
+
+    @media (max-width: ${breakpoints.tablet}) {
+      padding-top: 180px;
+    }
   }
 `
 
@@ -33,8 +41,16 @@ export const Info = styled.h3`
   top: 24px;
   font-size: 32px;
   font-weight: 100;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    font-size: 28px;
+  }
 `
 
 export const Title = styled.h2`
   font-size: 32px;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    font-size: 28px;
+  }
 `

@@ -48,8 +48,8 @@ const Dish = ({ dish }: Props) => {
   }
 
   const getDescriptionD = (description: string) => {
-    if (description.length > 150) {
-      return description.substring(0, 147) + '...'
+    if (description.length > 135) {
+      return description.substring(0, 132) + '...'
     }
   }
 

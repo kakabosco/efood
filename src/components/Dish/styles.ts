@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const Card = styled.div`
   padding: 8px;
@@ -78,6 +78,9 @@ export const Modal = styled.div`
       }
     }
   }
+
+  @media (max-width: ${breakpoints.tablet}) {
+  }
 `
 
 export const ModalContent = styled.div`
@@ -103,6 +106,17 @@ export const ModalContent = styled.div`
 
   ${Description} {
     margin: 16px 0;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    display: block;
+    height: 80vh;
+    overflow-y: scroll;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
 `
 

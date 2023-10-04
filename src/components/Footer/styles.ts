@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const FooterDiv = styled.div`
   display: flex;
@@ -16,6 +16,10 @@ export const FooterDiv = styled.div`
     width: 480px;
     font-size: 10px;
     text-align: center;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      width: 80%;
+    }
   }
 `
 

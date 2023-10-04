@@ -24,7 +24,7 @@ const RestaurantList = ({ restaurants }: Props) => {
   }
 
   return (
-    <div className="container">
+    <div>
       <List>
         {restaurants.map((restaurant) => (
           <li key={restaurant.id}>

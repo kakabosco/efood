@@ -1,13 +1,12 @@
 import Restaurant from '../Restaurant'
-import { Restaurant as RestaurantM } from '../../pages/Home'
 import { List } from './styles'
 
 type Props = {
-  restaurants: RestaurantM[]
+  restaurants: Restaurant[]
 }
 
 const RestaurantList = ({ restaurants }: Props) => {
-  const getRestaurantTags = (restaurant: RestaurantM) => {
+  const getRestaurantTags = (restaurant: Restaurant) => {
     const tags: string[] = []
 
     if (restaurant.destacado) {

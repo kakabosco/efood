@@ -1,9 +1,8 @@
 import Dish from '../Dish'
 import { List } from './styles'
-import { Dish as DishM } from '../../pages/Home'
 
 type Props = {
-  dishes: DishM[]
+  dishes: Dish[]
 }
 
 const DishesList = ({ dishes }: Props) => (

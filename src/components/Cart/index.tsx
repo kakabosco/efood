@@ -1,54 +1,49 @@
 import { useDispatch, useSelector } from 'react-redux'
+
 import { RootReducer } from '../../store'
-import { close, remove } from '../../store/reducers/cart'
-import { priceFormatter } from '../Dish'
-import {
-  CartContainer,
-  Overlay,
-  Sidebar,
-  CartItem,
-  Prices,
-  Button
-} from './styles'
+import { remove, setTab } from '../../store/reducers/cart'
+import { priceFormatter, getTotalPrice } from '../../utils'
+
+import * as S from './styles'
 
 const Cart = () => {
-  const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
+  const { items } = useSelector((state: RootReducer) => state.cart)
   const dispatch = useDispatch()
-  const closeCart = () => {
-    dispatch(close())
-  }
 
   const removeItem = (id: number) => {
     dispatch(remove(id))
   }
 
-  const getTotalPrice = () => {
-    return items.reduce((acc, item) => (acc += item.preco), 0)
-  }
-
   return (
-    <CartContainer className={isOpen ? 'is-open' : ''}>
-      <Overlay onClick={closeCart} />
-      <Sidebar>
-        <ul>
-          {items.map((item) => (
-            <CartItem key={item.id}>
-              <img src={item.foto} alt={item.nome} />
-              <div>
-                <h3>{item.nome}</h3>
-                <span>{priceFormatter(item.preco)}</span>
-              </div>
-              <button onClick={() => removeItem(item.id)} type="button" />
-            </CartItem>
-          ))}
-        </ul>
-        <Prices>
-          <span>Valor total</span>
-          <span>{priceFormatter(getTotalPrice())}</span>
-        </Prices>
-        <Button>Continuar com a entrega</Button>
-      </Sidebar>
-    </CartContainer>
+    <S.CartContainer>
+      {items.length > 0 ? (
+        <>
+          <ul>
+            {items.map((item) => (
+              <S.CartItem key={item.id}>
+                <img src={item.foto} alt={item.nome} />
+                <div>
+                  <h3>{item.nome}</h3>
+                  <span>{priceFormatter(item.preco)}</span>
+                </div>
+                <button onClick={() => removeItem(item.id)} type="button" />
+              </S.CartItem>
+            ))}
+          </ul>
+          <S.Prices>
+            <span>Valor total</span>
+            <span>{priceFormatter(getTotalPrice(items))}</span>
+          </S.Prices>
+          <S.Button onClick={() => dispatch(setTab('delivery'))}>
+            Continuar com a entrega
+          </S.Button>
+        </>
+      ) : (
+        <p className="empty-text">
+          O carrinho está vazio, adicione sua refeição antes de prosseguir.
+        </p>
+      )}
+    </S.CartContainer>
   )
 }
 

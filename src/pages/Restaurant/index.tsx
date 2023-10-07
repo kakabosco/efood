@@ -1,8 +1,10 @@
 import { useParams } from 'react-router-dom'
-import { useGetDishesQuery } from '../../services/api'
+
 import Banner from '../../components/Banner'
+import AsideTab from '../../container/AsideTab'
 import DishesList from '../../components/DishesList'
-import Cart from '../../components/Cart'
+
+import { useGetDishesQuery } from '../../services/api'
 
 const Restaurant = () => {
   const { id } = useParams()
@@ -19,7 +21,7 @@ const Restaurant = () => {
       <div>
         <DishesList dishes={dishes} />
       </div>
-      <Cart />
+      <AsideTab />
     </>
   )
 }

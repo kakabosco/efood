@@ -1,5 +1,11 @@
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
+
+import { priceFormatter } from '../../utils'
+import { add, open, setTab } from '../../store/reducers/cart'
+
+import close from '../../assets/images/fechar.png'
+
 import {
   Card,
   Title,
@@ -10,29 +16,20 @@ import {
   Portion,
   AddCart
 } from './styles'
-import close from '../../assets/images/fechar.png'
-import { add, open } from '../../store/reducers/cart'
-import { Dish as DishType } from '../../pages/Home'
 
 type Props = {
-  dish: DishType
+  dish: Dish
 }
 
 type ModalState = {
   isOpenM: boolean
 }
 
-export const priceFormatter = (price = 0) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(price)
-}
-
 const Dish = ({ dish }: Props) => {
   const [modal, setModal] = useState<ModalState>({
     isOpenM: false
   })
+  const dispatch = useDispatch()
 
   const closeModal = () => {
     setModal({
@@ -40,9 +37,9 @@ const Dish = ({ dish }: Props) => {
     })
   }
 
-  const dispatch = useDispatch()
   const addToCart = () => {
     dispatch(add(dish))
+    dispatch(setTab('cart'))
     dispatch(open())
     closeModal()
   }

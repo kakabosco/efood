@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootReducer } from '../../store'
-import { open } from '../../store/reducers/cart'
+import { open, setTab } from '../../store/reducers/cart'
 import { HeaderDiv, Title, LogoDiv, ReturnLink, Cart } from './styles'
 import logo from '../../assets/images/logo.png'
 import { Link } from 'react-router-dom'
@@ -18,6 +18,7 @@ const Header = () => {
   const { items } = useSelector((state: RootReducer) => state.cart)
   const dispatch = useDispatch()
   const openCart = () => {
+    dispatch(setTab('cart'))
     dispatch(open())
   }
 

@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 
+import Loader from '../../components/Loader'
 import Banner from '../../components/Banner'
 import AsideTab from '../../container/AsideTab'
 import DishesList from '../../components/DishesList'
@@ -12,7 +13,7 @@ const Restaurant = () => {
   const dishes = restaurantData?.cardapio
 
   if (!dishes) {
-    return <h3>Carregando...</h3>
+    return <Loader />
   }
 
   return (

@@ -1,4 +1,7 @@
 import { useParams } from 'react-router-dom'
+
+import Loader from '../Loader'
+
 import { useGetBannerQuery } from '../../services/api'
 import { Image, Info, Title } from './styles'
 
@@ -7,7 +10,7 @@ const Banner = () => {
   const { data: restaurant } = useGetBannerQuery(id!)
 
   if (!restaurant) {
-    return <h3>Carregando...</h3>
+    return <Loader />
   }
 
   return (

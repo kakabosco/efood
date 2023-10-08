@@ -6,17 +6,22 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { RootReducer } from '../../store'
-import { close, clear, setTab } from '../../store/reducers/cart'
 import { usePurchaseMutation } from '../../services/api'
+import { setPaymentData } from '../../store/reducers/checkout'
+import { close, clear, setTab } from '../../store/reducers/cart'
 import { getTotalPrice, priceFormatter } from '../../utils'
 
 import * as S from '../../styles'
 
 const DeliveryInfo = () => {
-  const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
-  const { items } = useSelector((state: RootReducer) => state.cart)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { delivery, payment } = useSelector((state: RootReducer) => ({
+    delivery: state.checkout.delivery,
+    payment: state.checkout.payment
+  }))
+  const { items } = useSelector((state: RootReducer) => state.cart)
+  const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
 
   const form = useFormik({
     initialValues: {
@@ -40,18 +45,8 @@ const DeliveryInfo = () => {
       cardYear: Yup.string().required('Ano de vencimento obrigatório')
     }),
     onSubmit: (values) => {
-      purchase({
-        delivery: {
-          receiver: values.receiverName,
-          address: {
-            description: values.address,
-            city: values.city,
-            zipCode: values.zipCode,
-            number: Number(values.number),
-            complement: values.complement
-          }
-        },
-        payment: {
+      dispatch(
+        setPaymentData({
           card: {
             name: values.cardName,
             number: values.cardNumber,
@@ -61,12 +56,19 @@ const DeliveryInfo = () => {
               year: Number(values.cardYear)
             }
           }
-        },
-        products: items.map((item) => ({
-          id: item.id,
-          price: item.preco as number
-        }))
-      })
+        })
+      )
+
+      if (delivery && payment) {
+        purchase({
+          delivery,
+          payment,
+          products: items.map((item) => ({
+            id: item.id,
+            price: item.preco as number
+          }))
+        })
+      }
     }
   })
 

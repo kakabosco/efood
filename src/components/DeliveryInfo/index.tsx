@@ -1,18 +1,18 @@
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import InputMask from 'react-input-mask'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { RootReducer } from '../../store'
 import { setTab } from '../../store/reducers/cart'
-import { usePurchaseMutation } from '../../services/api'
+import { setDeliveryData } from '../../store/reducers/checkout'
 
 import * as S from '../../styles'
-import { useEffect } from 'react'
 
 const DeliveryInfo = () => {
-  const [purchase, { isSuccess }] = usePurchaseMutation()
   const { items } = useSelector((state: RootReducer) => state.cart)
+  const [formSubmitted, setFormSubmitted] = useState(false)
   const dispatch = useDispatch()
 
   const form = useFormik({
@@ -40,8 +40,8 @@ const DeliveryInfo = () => {
       complement: Yup.string()
     }),
     onSubmit: (values) => {
-      purchase({
-        delivery: {
+      dispatch(
+        setDeliveryData({
           receiver: values.receiverName,
           address: {
             description: values.address,
@@ -50,23 +50,9 @@ const DeliveryInfo = () => {
             number: Number(values.number),
             complement: values.complement
           }
-        },
-        payment: {
-          card: {
-            name: values.cardName,
-            number: values.cardNumber,
-            code: Number(values.cardCode),
-            expires: {
-              month: Number(values.cardMonth),
-              year: Number(values.cardYear)
-            }
-          }
-        },
-        products: items.map((item) => ({
-          id: item.id,
-          price: item.preco as number
-        }))
-      })
+        })
+      )
+      setFormSubmitted(true)
     }
   })
 
@@ -83,12 +69,12 @@ const DeliveryInfo = () => {
   }
 
   useEffect(() => {
-    if (isSuccess) {
+    if (formSubmitted) {
       dispatch(setTab('payment'))
     }
-  })
+  }, [dispatch, formSubmitted])
 
-  if (items.length === 0 && !isSuccess) {
+  if (items.length === 0 && !formSubmitted) {
     return null
   }
 

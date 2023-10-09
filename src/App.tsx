@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 import Header from './components/Header'
 import Footer from './components/Footer'
+import AsideTab from './container/AsideTab'
 
 import Router from './routes'
 import { store } from './store'
@@ -19,6 +20,7 @@ function App() {
         <ScrollToTop />
         <Router />
         <Footer />
+        <AsideTab />
       </BrowserRouter>
     </Provider>
   )

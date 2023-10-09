@@ -15,18 +15,28 @@ export const HeaderDiv = styled.header<HeaderProps>`
 
 export const LogoDiv = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   padding: 64px 0;
+  position: relative;
+
+  .absolute-right {
+    position: absolute;
+    right: 0;
+  }
+
+  .absolute-left {
+    position: absolute;
+    left: 0;
+  }
 
   @media (max-width: ${breakpoints.tablet}) {
     padding: 48px 0;
-    justify-content: center;
+    justify-content: space-between;
   }
 
-  img {
+  Link img {
     margin: 0 auto;
-    padding: 0 32px;
 
     @media (max-width: ${breakpoints.tablet}) {
       padding: 0;
@@ -58,9 +68,27 @@ export const ReturnLink = styled(Link)`
   }
 `
 
+export const CartContainer = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  img {
+    display: block;
+    width: 32px;
+    height: 32px;
+    margin-left: 8px;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    span {
+      display: none;
+    }
+  }
+`
+
 export const Cart = styled.a`
   font-weight: bold;
-  cursor: pointer;
 
   @media (max-width: ${breakpoints.tablet}) {
     margin-left: auto;

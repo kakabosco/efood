@@ -1,10 +1,14 @@
+import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+
 import { RootReducer } from '../../store'
 import { open, setTab } from '../../store/reducers/cart'
-import { HeaderDiv, Title, LogoDiv, ReturnLink, Cart } from './styles'
+
 import logo from '../../assets/images/logo.png'
-import { Link } from 'react-router-dom'
+import cart from '../../assets/images/carrinho.png'
+
+import * as S from './styles'
 
 export type HeaderProps = {
   height?: string
@@ -30,26 +34,39 @@ const Header = () => {
   const showCart = !isHomePage
 
   return (
-    <HeaderDiv height={height}>
+    <S.HeaderDiv height={height}>
       <div className="container">
-        <LogoDiv>
+        <S.LogoDiv>
           {showReturnLink && (
-            <ReturnLink to="/">&lsaquo; Voltar para restaurantes</ReturnLink>
+            <S.ReturnLink to="/" className="absolute-left">
+              &lsaquo; Voltar para restaurantes
+            </S.ReturnLink>
           )}
           <Link to="/">
             <img src={logo} alt="Logo" />
           </Link>
-          {showCart && (
-            <Cart onClick={openCart}>
-              {items.length} produto(s) no carrinho
-            </Cart>
+          {isHomePage && (
+            <S.CartContainer className="absolute-right" onClick={openCart}>
+              <S.Cart>{items.length}</S.Cart>
+              <img src={cart} alt="Carrinho" />
+            </S.CartContainer>
           )}
-        </LogoDiv>
+          {showCart && (
+            <S.CartContainer onClick={openCart} className="absolute-right">
+              <S.Cart>
+                {items.length} <span> - Produto(s) no carrinho</span>
+              </S.Cart>
+              <img src={cart} alt="Carrinho" />
+            </S.CartContainer>
+          )}
+        </S.LogoDiv>
       </div>
       {showTitle && (
-        <Title>Viva experiências gastronômicas no conforto da sua casa</Title>
+        <S.Title>
+          Viva experiências gastronômicas no conforto da sua casa
+        </S.Title>
       )}
-    </HeaderDiv>
+    </S.HeaderDiv>
   )
 }
 

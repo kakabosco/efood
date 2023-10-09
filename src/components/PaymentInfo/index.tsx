@@ -7,9 +7,9 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { RootReducer } from '../../store'
 import { usePurchaseMutation } from '../../services/api'
+import { getTotalPrice, priceFormatter } from '../../utils'
 import { setPaymentData } from '../../store/reducers/checkout'
 import { close, clear, setTab } from '../../store/reducers/cart'
-import { getTotalPrice, priceFormatter } from '../../utils'
 
 import * as S from '../../styles'
 

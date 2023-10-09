@@ -1,6 +1,7 @@
-import { useGetRestaurantQuery } from '../../services/api'
-import RestaurantList from '../../components/RestaurantsList'
 import Loader from '../../components/Loader'
+import RestaurantList from '../../components/RestaurantsList'
+
+import { useGetRestaurantQuery } from '../../services/api'
 
 const Home = () => {
   const { data: restaurants } = useGetRestaurantQuery()

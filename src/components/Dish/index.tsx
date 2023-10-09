@@ -6,16 +6,7 @@ import { add, open, setTab } from '../../store/reducers/cart'
 
 import close from '../../assets/images/fechar.png'
 
-import {
-  Card,
-  Title,
-  Description,
-  MoreButton,
-  Modal,
-  ModalContent,
-  Portion,
-  AddCart
-} from './styles'
+import * as S from './styles'
 
 type Props = {
   dish: Dish
@@ -52,15 +43,15 @@ const Dish = ({ dish }: Props) => {
 
   return (
     <>
-      <Card>
+      <S.Card>
         <img src={dish.foto} alt={dish.nome} />
-        <Title>{dish.nome}</Title>
-        <Description>{getDescriptionD(dish.descricao)}</Description>
-        <MoreButton onClick={() => setModal({ isOpenM: true })}>
+        <S.Title>{dish.nome}</S.Title>
+        <S.Description>{getDescriptionD(dish.descricao)}</S.Description>
+        <S.MoreButton onClick={() => setModal({ isOpenM: true })}>
           Mais detalhes
-        </MoreButton>
-      </Card>
-      <Modal className={modal.isOpenM ? 'active' : ''}>
+        </S.MoreButton>
+      </S.Card>
+      <S.Modal className={modal.isOpenM ? 'active' : ''}>
         <div className="container">
           <header>
             <img
@@ -71,17 +62,17 @@ const Dish = ({ dish }: Props) => {
               }}
             />
           </header>
-          <ModalContent>
+          <S.ModalContent>
             <img src={dish.foto} alt={dish.nome} />
             <div>
-              <Title>{dish.nome}</Title>
-              <Description>{dish.descricao}</Description>
-              <Portion>Serve {dish.porcao}</Portion>
-              <AddCart onClick={addToCart}>
+              <S.Title>{dish.nome}</S.Title>
+              <S.Description>{dish.descricao}</S.Description>
+              <S.Portion>Serve {dish.porcao}</S.Portion>
+              <S.AddCart onClick={addToCart}>
                 Adicionar ao carrinho - {priceFormatter(dish.preco)}
-              </AddCart>
+              </S.AddCart>
             </div>
-          </ModalContent>
+          </S.ModalContent>
         </div>
         <div
           className="overlay"
@@ -89,7 +80,7 @@ const Dish = ({ dish }: Props) => {
             closeModal()
           }}
         ></div>
-      </Modal>
+      </S.Modal>
     </>
   )
 }

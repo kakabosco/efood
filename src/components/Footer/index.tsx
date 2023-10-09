@@ -1,7 +1,8 @@
 import logo from '../../assets/images/logo.png'
-import instagram from '../../assets/images/instagram.png'
-import facebook from '../../assets/images/facebook.png'
 import twitter from '../../assets/images/twitter.png'
+import facebook from '../../assets/images/facebook.png'
+import instagram from '../../assets/images/instagram.png'
+
 import { FooterDiv, SocialMedia } from './styles'
 
 const Footer = () => (

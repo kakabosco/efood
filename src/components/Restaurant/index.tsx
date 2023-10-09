@@ -1,16 +1,8 @@
 import { Link } from 'react-router-dom'
-import {
-  Card,
-  Infos,
-  Tag,
-  InfoContainer,
-  Title,
-  RatingDiv,
-  Rating,
-  Description,
-  About
-} from './styles'
+
 import estrela from '../../assets/images/estrela.png'
+
+import * as S from './styles'
 
 export type Props = {
   infos: string[]
@@ -36,27 +28,27 @@ const Restaurant = ({
   }
 
   return (
-    <Card>
+    <S.Card>
       <img src={image} alt={title} />
-      <Infos>
+      <S.Infos>
         {infos.map((info) => (
-          <Tag key={info}>{info}</Tag>
+          <S.Tag key={info}>{info}</S.Tag>
         ))}
-      </Infos>
-      <InfoContainer>
+      </S.Infos>
+      <S.InfoContainer>
         <div>
-          <Title>{title}</Title>
-          <RatingDiv>
-            <Rating>{rating}</Rating>
+          <S.Title>{title}</S.Title>
+          <S.RatingDiv>
+            <S.Rating>{rating}</S.Rating>
             <img src={estrela} alt="Avaliação" />
-          </RatingDiv>
+          </S.RatingDiv>
         </div>
-        <Description>{getDescriptionR(description)}</Description>
+        <S.Description>{getDescriptionR(description)}</S.Description>
         <Link to={`/restaurants/${id}`}>
-          <About>Saiba Mais</About>
+          <S.About>Saiba Mais</S.About>
         </Link>
-      </InfoContainer>
-    </Card>
+      </S.InfoContainer>
+    </S.Card>
   )
 }
 
